@@ -1,13 +1,12 @@
 package christaul.gui;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.KeyStroke;
-
-import com.sun.glass.events.KeyEvent;
 
 public class GameFrame
 	extends JFrame
