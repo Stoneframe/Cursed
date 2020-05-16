@@ -8,21 +8,27 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.KeyStroke;
 
-public class GameFrame
-	extends JFrame
+public class Display
 {
-	private static final long serialVersionUID = 779680918452594443L;
+	private static final KeyStroke ESCAPE_KEY_STROKE =
+			KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
 
-	public GameFrame()
+	private JFrame frame;
+
+	public Display()
 	{
-		super("Cursed");
+		createDisplay();
+	}
 
-		KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-
-		getRootPane()
+	private void createDisplay()
+	{
+		frame = new JFrame();
+		frame
+			.getRootPane()
 			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(escapeKeyStroke, "ESCAPE");
-		getRootPane()
+			.put(ESCAPE_KEY_STROKE, "ESCAPE");
+		frame
+			.getRootPane()
 			.getActionMap()
 			.put("ESCAPE", new AbstractAction()
 			{
@@ -35,14 +41,9 @@ public class GameFrame
 				}
 			});
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setUndecorated(true);
-		setVisible(true);
-	}
-
-	public static void main(String[] args)
-	{
-		new GameFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setUndecorated(true);
+		frame.setVisible(true);
 	}
 }
