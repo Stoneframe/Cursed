@@ -1,4 +1,6 @@
-package christaul.gui;
+package christaul.cursed;
+
+import christaul.cursed.display.Display;
 
 public class Launcher
 {

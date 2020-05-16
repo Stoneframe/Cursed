@@ -1,4 +1,4 @@
-package christaul.gui;
+package christaul.cursed.display;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
