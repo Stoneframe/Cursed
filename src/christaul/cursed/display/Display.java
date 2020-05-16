@@ -1,5 +1,6 @@
 package christaul.cursed.display;
 
+import java.awt.Canvas;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -14,6 +15,7 @@ public class Display
 			KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
 
 	private JFrame frame;
+	private Canvas canvas;
 
 	public Display()
 	{
@@ -45,5 +47,13 @@ public class Display
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setUndecorated(true);
 		frame.setVisible(true);
+		
+		canvas = new Canvas();
+		canvas.setPreferredSize(frame.getSize());
+		canvas.setMaximumSize(frame.getSize());
+		canvas.setMinimumSize(frame.getSize());
+		
+		frame.add(canvas);
+		frame.pack();
 	}
 }
