@@ -54,4 +54,19 @@ public class Display
 		frame.add(canvas);
 		frame.pack();
 	}
+	
+	public int getWidth()
+	{
+		return frame.getSize().width;
+	}
+	
+	public int getHeight()
+	{
+		return frame.getSize().height;
+	}
+	
+	public Canvas getCanvas()
+	{
+		return canvas;
+	}
 }
