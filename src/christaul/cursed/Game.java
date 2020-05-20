@@ -1,20 +1,15 @@
 package christaul.cursed;
 
-import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
-
 import christaul.cursed.display.Display;
+import christaul.cursed.display.DisplayImpl;
 
 public class Game
 	implements
 		Runnable
 {
-	private Display display;
+	protected Display display;
 
 	private Thread thread;
-
-	private BufferStrategy bs;
-	private Graphics g;
 
 	private boolean running = false;
 
@@ -65,28 +60,19 @@ public class Game
 		}
 	}
 
-	private void init()
+	protected void init()
 	{
-		display = new Display();
+		display = new DisplayImpl();
 	}
 
 	private void update()
 	{
-
+		System.out.println("Update");
 	}
 
 	private void draw()
 	{
-		bs = display.getCanvas().getBufferStrategy();
-		if (bs == null)
-		{
-			display.getCanvas().createBufferStrategy(3);
-			return;
-		}
-		g = bs.getDrawGraphics();
-		g.fillRect(0, 0, display.getWidth(), display.getHeight());
-
-		bs.show();
-		g.dispose();
+		display.startDrawing();
+		display.stopDrawing();
 	}
 }

@@ -1,72 +1,8 @@
 package christaul.cursed.display;
 
-import java.awt.Canvas;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-
-import javax.swing.AbstractAction;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.KeyStroke;
-
-public class Display
+public interface Display
 {
-	private static final KeyStroke ESCAPE_KEY_STROKE =
-			KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-
-	private JFrame frame;
-	private Canvas canvas;
-
-	public Display()
-	{
-		createDisplay();
-	}
-
-	private void createDisplay()
-	{
-		frame = new JFrame();
-		frame.getRootPane()
-			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
-			.put(ESCAPE_KEY_STROKE, "ESCAPE");
-		frame.getRootPane()
-			.getActionMap()
-			.put("ESCAPE", new AbstractAction()
-			{
-				private static final long serialVersionUID = 4403370472658630695L;
-
-				@Override
-				public void actionPerformed(ActionEvent e)
-				{
-					System.exit(0);
-				}
-			});
-
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.setUndecorated(true);
-		frame.setVisible(true);
-
-		canvas = new Canvas();
-		canvas.setPreferredSize(frame.getSize());
-		canvas.setMaximumSize(frame.getSize());
-		canvas.setMinimumSize(frame.getSize());
-
-		frame.add(canvas);
-		frame.pack();
-	}
+	void startDrawing();
 	
-	public int getWidth()
-	{
-		return frame.getSize().width;
-	}
-	
-	public int getHeight()
-	{
-		return frame.getSize().height;
-	}
-	
-	public Canvas getCanvas()
-	{
-		return canvas;
-	}
+	void stopDrawing();
 }
