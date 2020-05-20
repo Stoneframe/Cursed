@@ -25,12 +25,10 @@ public class Display
 	private void createDisplay()
 	{
 		frame = new JFrame();
-		frame
-			.getRootPane()
+		frame.getRootPane()
 			.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
 			.put(ESCAPE_KEY_STROKE, "ESCAPE");
-		frame
-			.getRootPane()
+		frame.getRootPane()
 			.getActionMap()
 			.put("ESCAPE", new AbstractAction()
 			{
@@ -47,12 +45,12 @@ public class Display
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setUndecorated(true);
 		frame.setVisible(true);
-		
+
 		canvas = new Canvas();
 		canvas.setPreferredSize(frame.getSize());
 		canvas.setMaximumSize(frame.getSize());
 		canvas.setMinimumSize(frame.getSize());
-		
+
 		frame.add(canvas);
 		frame.pack();
 	}
