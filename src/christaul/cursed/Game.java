@@ -11,11 +11,10 @@ public class Game
 
 	private Thread thread;
 
-	private boolean running = false;
+	private volatile boolean running = false;
 
 	public Game()
 	{
-
 	}
 
 	@Override
@@ -67,7 +66,6 @@ public class Game
 
 	private void update()
 	{
-		System.out.println("Update");
 	}
 
 	private void draw()

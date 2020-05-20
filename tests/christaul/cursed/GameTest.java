@@ -1,6 +1,7 @@
 package christaul.cursed;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -18,6 +19,8 @@ public class GameTest
 	private LocalTime startTime;
 	private LocalTime stopTime;
 
+	private IllegalStateException illegalStateExceptionThrown;
+
 	@BeforeEach
 	public void setUp() throws Exception
 	{
@@ -30,10 +33,11 @@ public class GameTest
 		game = null;
 		startTime = null;
 		stopTime = null;
+		illegalStateExceptionThrown = null;
 	}
 
 	@Test
-	public void runGame() throws Exception
+	public void startAndStopGame() throws Exception
 	{
 		givenNothing();
 		thenStartGame();
@@ -42,14 +46,62 @@ public class GameTest
 		expectGameRan(DURATION);
 	}
 
+	@Test
+	public void startingStartedGameThrowsException()
+	{
+		givenGameIsStarted();
+		thenStartGame();
+		expectIllegalStateExceptionIsThrown();
+	}
+
+	@Test
+	public void stoppingStoppedGameThrowsException()
+	{
+		givenGameIsStopped();
+		thenStopGame();
+		expectIllegalStateExceptionIsThrown();
+	}
+
+	private void expectIllegalStateExceptionIsThrown()
+	{
+		assertNotNull(illegalStateExceptionThrown);
+	}
+
 	private void givenNothing()
+	{
+	}
+
+	private void givenGameIsStarted()
+	{
+		startGame();
+	}
+
+	private void givenGameIsStopped()
 	{
 	}
 
 	private void thenStartGame()
 	{
-		game.start();
-		startTime = LocalTime.now();
+		try
+		{
+			startGame();
+		}
+		catch (IllegalStateException e)
+		{
+			illegalStateExceptionThrown = e;
+		}
+	}
+
+	private void thenStopGame()
+	{
+		try
+		{
+			stopGame();
+		}
+		catch (IllegalStateException e)
+		{
+			illegalStateExceptionThrown = e;
+		}
 	}
 
 	private void thenWait(Duration duration) throws InterruptedException
@@ -57,15 +109,21 @@ public class GameTest
 		Thread.sleep(duration.toMillis());
 	}
 
-	private void thenStopGame()
-	{
-		game.stop();
-		stopTime = LocalTime.now();
-	}
-
 	private void expectGameRan(Duration expectedDuration)
 	{
 		assertEquals(getTotalGameRunTime().toMillis(), expectedDuration.toMillis(), 10);
+	}
+
+	private void startGame()
+	{
+		game.start();
+		startTime = LocalTime.now();
+	}
+
+	private void stopGame()
+	{
+		game.stop();
+		stopTime = LocalTime.now();
 	}
 
 	private Duration getTotalGameRunTime()
